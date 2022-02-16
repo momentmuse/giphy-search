@@ -5,6 +5,7 @@ import { SearchResults } from './SearchResults';
 
 export const SearchContainer = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchResultData, setSearchResultData] = useState([]);
 
   const handleChange = (e) => {
     e.preventDefault();
