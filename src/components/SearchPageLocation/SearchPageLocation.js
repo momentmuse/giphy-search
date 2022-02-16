@@ -1,4 +1,12 @@
-import { PageLocationContainer } from './SearchPageLocation.styled';
+import {
+  PageLocationContainer,
+  StyledButton,
+} from './SearchPageLocation.styled';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faChevronLeft,
+  faChevronRight,
+} from '@fortawesome/free-solid-svg-icons';
 
 export const SearchPageLocation = ({
   currentPage,
@@ -11,13 +19,19 @@ export const SearchPageLocation = ({
 
   return (
     <PageLocationContainer>
-      <button onClick={() => handlePageChange(-1)} disabled={isDisabled(-1)}>
-        &#8249;
-      </button>
-      page {currentPage} of {totalPages}
-      <button onClick={() => handlePageChange(1)} disabled={isDisabled(1)}>
-        &#8250;
-      </button>
+      <StyledButton
+        onClick={() => handlePageChange(-1)}
+        disabled={isDisabled(-1)}
+      >
+        <FontAwesomeIcon icon={faChevronLeft} />
+      </StyledButton>
+      &nbsp;Page {currentPage} of {totalPages}&nbsp;
+      <StyledButton
+        onClick={() => handlePageChange(1)}
+        disabled={isDisabled(1)}
+      >
+        <FontAwesomeIcon icon={faChevronRight} />
+      </StyledButton>
     </PageLocationContainer>
   );
 };

@@ -1,15 +1,23 @@
-import { InputContainer } from './SearchInput.styled';
+import {
+  InputContainer,
+  StyledInput,
+  StyledSearchButton,
+} from './SearchInput.styled';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 export const SearchInput = ({ handleSubmit, handleChange }) => {
   return (
     <InputContainer>
       <form role="search" onSubmit={handleSubmit}>
-        <input
+        <StyledInput
           type="search"
           aria-label="Search for a gif"
           onChange={handleChange}
         />
-        <button>Search</button>
+        <StyledSearchButton>
+          <FontAwesomeIcon icon={faMagnifyingGlass} />
+        </StyledSearchButton>
       </form>
     </InputContainer>
   );
