@@ -24,10 +24,12 @@ export const SearchContainer = () => {
     console.log(gifs);
     setSearchResultData(gifs);
     setPaginationImageCount(pagination.total_count);
-    // send api GET request with searchQuery, limit = interval and offset = currentPage * interval
-    // set searchResultData
-    // set pagImgCount (pag object comes with data)
   };
+
+  useEffect(() => {
+    fetchResults();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage]);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -37,6 +39,7 @@ export const SearchContainer = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     fetchResults();
+    setCurrentPage(0);
   };
 
   const handlePageChange = (value) => {
@@ -44,16 +47,16 @@ export const SearchContainer = () => {
   };
 
   const totalPages = () => {
-    // calculate num of pages by dividing total num of image results by 10 (interval constant) and any leftover is an extra page
-    // Math.ceil?
-    return 10;
+    return paginationImageCount
+      ? Math.ceil(paginationImageCount / PAGINATION_INTERVAL)
+      : 1;
   };
 
   return (
     <>
       <h2>I'm the Search Container!</h2>
       <SearchInput handleChange={handleChange} handleSubmit={handleSubmit} />
-      <SearchResults />
+      <SearchResults searchResultData={searchResultData} />
       <SearchPageLocation
         /*currentPage + 1 because it starts at 0 for offset*/
         currentPage={currentPage + 1}

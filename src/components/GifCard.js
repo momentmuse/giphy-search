@@ -1,8 +1,7 @@
-export const GifCard = ({ title }) => {
+export const GifCard = ({ gifURL, title }) => {
   return (
     <article>
-      <h3>I'm a card!</h3>
-      <span>{title}</span>
+      <img src={gifURL} alt={title} />
     </article>
   );
 };
