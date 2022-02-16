@@ -1,7 +1,9 @@
+import { memo } from 'react';
 import { GifCard } from './GifCard';
 
-export const SearchResults = ({ searchResultData }) => {
+const SearchResults = ({ searchResultData }) => {
   const populateResults = () => {
+    console.log('POPULATING RESULTS');
     return searchResultData.map((gif) => (
       <GifCard
         gifURL={gif.images.fixed_height.url}
@@ -13,3 +15,5 @@ export const SearchResults = ({ searchResultData }) => {
 
   return <>{populateResults()}</>;
 };
+
+export const MemoizedSearchResults = memo(SearchResults);
