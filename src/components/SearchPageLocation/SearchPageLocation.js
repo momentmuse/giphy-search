@@ -12,11 +12,11 @@ export const SearchPageLocation = ({
   return (
     <PageLocationContainer>
       <button onClick={() => handlePageChange(-1)} disabled={isDisabled(-1)}>
-        prev
+        &#8249;
       </button>
       page {currentPage} of {totalPages}
       <button onClick={() => handlePageChange(1)} disabled={isDisabled(1)}>
-        next
+        &#8250;
       </button>
     </PageLocationContainer>
   );

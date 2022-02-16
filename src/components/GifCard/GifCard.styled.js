@@ -1,5 +1,5 @@
 import styled from 'styled-components';
 
 export const StyledCard = styled.article`
-  margin: 2rem;
+  margin: 1.5rem 2rem;
 `;
