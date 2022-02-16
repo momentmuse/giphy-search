@@ -1,9 +1,10 @@
-import { SearchContainer } from './components/SearchContainer';
+import { StyledHeader } from './App.styled';
+import { SearchContainer } from './components/SearchContainer/SearchContainer';
 
 function App() {
   return (
     <div className="App">
-      <h1>Giphy Search</h1>
+      <StyledHeader>Giphy Search</StyledHeader>
       <SearchContainer />
     </div>
   );

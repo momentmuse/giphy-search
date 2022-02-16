@@ -1,5 +1,6 @@
 import { memo, useCallback } from 'react';
-import { GifCard } from './GifCard';
+import { GifCard } from './../GifCard/GifCard';
+import { ResultsContainer } from './SearchResults.styled';
 
 const SearchResults = ({ searchResultData, isSearching }) => {
   const populateResults = useCallback(() => {
@@ -16,7 +17,7 @@ const SearchResults = ({ searchResultData, isSearching }) => {
     }
   }, [searchResultData, isSearching]);
 
-  return <>{populateResults()}</>;
+  return <ResultsContainer>{populateResults()}</ResultsContainer>;
 };
 
 export const MemoizedSearchResults = memo(SearchResults);

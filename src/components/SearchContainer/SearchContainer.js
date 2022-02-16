@@ -1,10 +1,11 @@
 import { useState, useEffect, useCallback } from 'react';
-import { SearchInput } from './SearchInput';
-import { SearchPageLocation } from './SearchPageLocation';
-import { MemoizedSearchResults } from './SearchResults';
-import { useDebounce } from '../hooks';
-import { getSearchResults } from '../services';
-import { PAGINATION_INTERVAL } from '../constants';
+import { SearchInput } from '../SearchInput/SearchInput';
+import { SearchPageLocation } from '../SearchPageLocation/SearchPageLocation';
+import { MemoizedSearchResults } from '../SearchResults/SearchResults';
+import { useDebounce } from '../../hooks';
+import { getSearchResults } from '../../services';
+import { PAGINATION_INTERVAL } from '../../constants';
+import { StyledContainer } from './SearchContainer.styled';
 
 export const SearchContainer = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -26,7 +27,7 @@ export const SearchContainer = () => {
     setPaginationImageCount(pagination.total_count);
   }, [currentPage, searchQuery]);
 
-  // fetch on page change
+  // fetch on currentPage change
   useEffect(() => {
     fetchResults();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -71,8 +72,7 @@ export const SearchContainer = () => {
   };
 
   return (
-    <>
-      <h2>I'm the Search Container!</h2>
+    <StyledContainer>
       <SearchInput handleChange={handleChange} handleSubmit={handleSubmit} />
       <MemoizedSearchResults
         searchResultData={searchResultData}
@@ -84,6 +84,6 @@ export const SearchContainer = () => {
         handlePageChange={handlePageChange}
         totalPages={totalPages()}
       />
-    </>
+    </StyledContainer>
   );
 };

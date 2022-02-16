@@ -1,7 +1,9 @@
+import { StyledCard } from './GifCard.styled';
+
 export const GifCard = ({ gifURL, title }) => {
   return (
-    <article>
+    <StyledCard>
       <img src={gifURL} alt={title} />
-    </article>
+    </StyledCard>
   );
 };
