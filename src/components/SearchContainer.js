@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { SearchInput } from './SearchInput';
 import { SearchPageLocation } from './SearchPageLocation';
 import { MemoizedSearchResults } from './SearchResults';
+import { useDebounce } from '../hooks';
 import { getSearchResults } from '../services';
 import { PAGINATION_INTERVAL } from '../constants';
 
@@ -10,10 +11,10 @@ export const SearchContainer = () => {
   const [searchResultData, setSearchResultData] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [paginationImageCount, setPaginationImageCount] = useState(0);
+  const [isSearching, setIsSearching] = useState(false);
+  const debouncedSearchTerm = useDebounce(searchQuery, 600);
 
   const fetchResults = useCallback(async () => {
-    console.log('fetch results running ! ', searchQuery);
-
     const {
       data: { data: gifs, pagination },
     } = await new getSearchResults(searchQuery)
@@ -21,15 +22,32 @@ export const SearchContainer = () => {
       .offsetBy(currentPage * PAGINATION_INTERVAL)
       .send();
 
-    console.log(gifs);
     setSearchResultData(gifs);
     setPaginationImageCount(pagination.total_count);
   }, [currentPage, searchQuery]);
 
+  // fetch on page change
   useEffect(() => {
     fetchResults();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
+
+  // fetch on debounce
+  useEffect(
+    () => {
+      if (debouncedSearchTerm) {
+        setIsSearching(true);
+        fetchResults().then((results) => {
+          setIsSearching(false);
+        });
+      } else {
+        setIsSearching(false);
+      }
+      setCurrentPage(0);
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [debouncedSearchTerm]
+  );
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -56,7 +74,10 @@ export const SearchContainer = () => {
     <>
       <h2>I'm the Search Container!</h2>
       <SearchInput handleChange={handleChange} handleSubmit={handleSubmit} />
-      <MemoizedSearchResults searchResultData={searchResultData} />
+      <MemoizedSearchResults
+        searchResultData={searchResultData}
+        isSearching={isSearching}
+      />
       <SearchPageLocation
         /*currentPage + 1 because it starts at 0 for offset*/
         currentPage={currentPage + 1}
