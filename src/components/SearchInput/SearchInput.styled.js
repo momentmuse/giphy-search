@@ -8,8 +8,12 @@ export const InputContainer = styled.div`
 
 export const StyledInput = styled.input`
   border: none;
-  width: 20vw;
   padding: 0.5rem;
+  width: 80vw;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 25vw;
+  }
 `;
 
 export const StyledSearchButton = styled.button`

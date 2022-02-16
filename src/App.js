@@ -3,7 +3,7 @@ import { GlobalStyle, StyledHeader } from './App.styled';
 import { ThemeProvider } from 'styled-components';
 import theme from './theme/index';
 
-function App() {
+const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
@@ -13,6 +13,6 @@ function App() {
       </div>
     </ThemeProvider>
   );
-}
+};
 
 export default App;

@@ -16,15 +16,17 @@ export const SearchContainer = () => {
   const debouncedSearchTerm = useDebounce(searchQuery, 600);
 
   const fetchResults = useCallback(async () => {
-    const {
-      data: { data: gifs, pagination },
-    } = await new getSearchResults(searchQuery)
-      .limitTo(PAGINATION_INTERVAL)
-      .offsetBy(currentPage * PAGINATION_INTERVAL)
-      .send();
+    if (searchQuery.length > 0) {
+      const {
+        data: { data: gifs, pagination },
+      } = await new getSearchResults(searchQuery)
+        .limitTo(PAGINATION_INTERVAL)
+        .offsetBy(currentPage * PAGINATION_INTERVAL)
+        .send();
 
-    setSearchResultData(gifs);
-    setPaginationImageCount(pagination.total_count);
+      setSearchResultData(gifs);
+      setPaginationImageCount(pagination.total_count);
+    }
   }, [currentPage, searchQuery]);
 
   // fetch on currentPage change
