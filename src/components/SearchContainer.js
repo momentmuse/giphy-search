@@ -11,7 +11,19 @@ export const SearchContainer = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [paginationImageCount, setPaginationImageCount] = useState(0);
 
-  const fetchResults = () => {
+  const fetchResults = async () => {
+    console.log('fetch results running ! ', searchQuery);
+
+    const {
+      data: { data: gifs, pagination },
+    } = await new getSearchResults(searchQuery)
+      .limitTo(PAGINATION_INTERVAL)
+      .offsetBy(currentPage * PAGINATION_INTERVAL)
+      .send();
+
+    console.log(gifs);
+    setSearchResultData(gifs);
+    setPaginationImageCount(pagination.total_count);
     // send api GET request with searchQuery, limit = interval and offset = currentPage * interval
     // set searchResultData
     // set pagImgCount (pag object comes with data)
@@ -20,12 +32,11 @@ export const SearchContainer = () => {
   const handleChange = (e) => {
     e.preventDefault();
     setSearchQuery(e.target.value);
-    console.log('handling change!! ', e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('handling SUBMIT!! ', searchQuery);
+    fetchResults();
   };
 
   const handlePageChange = (value) => {
