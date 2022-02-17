@@ -14,7 +14,7 @@ a paginated giphy search SPA 🌈✨
 
 ## whyyyyy?! (frustrations)
 
-- editing import paths for relative imports AHHHH! set a root URL for absolute imports to ease the reorganization/renaming process
+- editing import paths for relative imports AHHHH! set a root URL for absolute imports to ease the reorganization/renaming process 🗂
 
 ## try again next time? (improvements)
 

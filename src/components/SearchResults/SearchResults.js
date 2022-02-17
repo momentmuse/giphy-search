@@ -14,6 +14,9 @@ const SearchResults = ({ searchResultData, isSearching }) => {
           gifURL={gif.images.fixed_height.url}
           key={gif.id}
           title={gif.title}
+          author={gif.username}
+          uploadDate={gif.import_datetime}
+          originalURL={gif.images.original.url}
         />
       ));
     }
