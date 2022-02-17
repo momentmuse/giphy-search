@@ -40,7 +40,7 @@ export const SearchContainer = () => {
     () => {
       if (debouncedSearchTerm) {
         setIsSearching(true);
-        fetchResults().then((results) => {
+        fetchResults().then(() => {
           setIsSearching(false);
         });
       } else {
