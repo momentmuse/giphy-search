@@ -1,5 +1,8 @@
 import Modal from 'react-modal';
 import moment from 'moment';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import './GifModal.css';
 
 export const GifModal = ({
   isOpen,
@@ -25,14 +28,20 @@ export const GifModal = ({
       ariaHideApp={false}
       shouldCloseOnOverlayClick={true}
       shouldCloseOnEsc={true}
+      closeTimeoutMS={500}
+      className="modal"
+      overlayClassName="modal-overlay"
     >
       <div>
+        <button className="close-button" onClick={toggleModal}>
+          {' '}
+          <FontAwesomeIcon icon={faXmark} />
+        </button>
         <h1>{title}</h1>
         <img src={originalURL} alt={title} />
         <h2>
           Posted by {sanitizeAuthor(author)} on {sanitizeDate(uploadDate)}
         </h2>
-        <button onClick={toggleModal}>Close modal</button>
       </div>
     </Modal>
   );
